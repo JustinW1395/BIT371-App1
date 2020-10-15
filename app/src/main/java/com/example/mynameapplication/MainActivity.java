@@ -24,6 +24,8 @@ public class MainActivity extends AppCompatActivity {
         ArrayAdapter <String> adapter = new ArrayAdapter<>(this, R.layout.listview_layout, R.id.city, cities);
         ListView lv = findViewById(R.id.city_list);
         lv.setAdapter(adapter);
+
+        //Makes a list on my apps landing page
     }
 
     public void LogIn(View view){
