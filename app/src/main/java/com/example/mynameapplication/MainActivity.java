@@ -1,6 +1,9 @@
 package com.example.mynameapplication;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
+import java.util.ArrayList;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -12,27 +15,28 @@ import android.widget.EditText;
 
 public class MainActivity extends AppCompatActivity {
 
+    ArrayList<Contact> contacts;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        // Lookup the recyclerview in activity layout
+        RecyclerView rvContacts = (RecyclerView) findViewById(R.id.rvContacts);
+
+        // Initialize contacts
+        contacts = Contact.createContactsList(20);
+
+        // Create adapter passing in the sample user data
+        ContactAdapter adapter = new ContactAdapter(contacts);
+
+        // Attach the adapter to the recyclerview to populate items
+        rvContacts.setAdapter(adapter);
+
+        // Set layout manager to position the items
+        rvContacts.setLayoutManager(new LinearLayoutManager(this));
     }
 
-    public void LogIn(View view){
 
-        Log.i( "INFO", "Logging in to " + Activity2.class.getName());
-        EditText user = findViewById(R.id.Username);
-        EditText pass = findViewById(R.id.Password);
-        String theusername = user.getText().toString();
-        String thepassword = pass.getText().toString();
-        Log.i("INFO", "Username is " + user.getText().toString());
-        Log.i("INFO", "Password is " + pass.getText().toString());
-        Intent intent = new Intent(getApplicationContext(),Activity2.class);
-        intent.putExtra("USERNAME", theusername);
-        intent.putExtra("PASSWORD", thepassword);
-        startActivity(intent);
-
-        // This was first lesson TextView tv = findViewById(R.id.textView);
-       // This was first lesson tv.setText("Hello World!");
-    }
 }
